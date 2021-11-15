@@ -1,9 +1,8 @@
-const key = '2108c58d47c3fe497acbeca2d1ec9c7e';
+const key = 'c3b60b13e7c85e386cdf467ef64b5c91'; //sesuai API Key Anda
 const endpoint_url = 'https://api.themoviedb.org/3/';
 
-
-function getListMovie(services, sectiontitle) {
-    fetch(endpoint_url + services + "?api_key=" + key + "&language=en-US&page=1")
+function getListMovie() {
+    fetch(endpoint_url + "movie/now_playing?api_key=" + key + "&language=en-US&page=1")
     .then(status)
     .then(json)
     .then(function(data) {
@@ -29,7 +28,6 @@ function getListMovie(services, sectiontitle) {
     });
 
     document.getElementById("movie_list").innerHTML = moviesHTML;
-    document.getElementById("section_title").innerHTML = sectiontitle;
-})
+    })
     .catch(error);
 }
