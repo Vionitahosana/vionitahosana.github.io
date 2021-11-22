@@ -6,10 +6,11 @@ function getListMovie() {
     .then(status)
     .then(json)
     .then(function(data) {
+        let moviesHTML ="";
     // Objek/array JavaScript dari response.json() masuk lewat data.
     // Menyusun komponen card movie secara dinamis
 
-    var moviesHTML = "";
+    
     data.results.forEach(function(movie) {
     moviesHTML += `
         <div class="col m3 s6">
