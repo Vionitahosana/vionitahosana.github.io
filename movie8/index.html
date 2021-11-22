@@ -53,7 +53,6 @@
 
     <div class="container">
     <h4 id="section_title">Now Playing</h4>
-    
     <div class="row">
     <div id="movie_list">
 
@@ -66,48 +65,64 @@
     <script type="text/javascript" src="js/init.js"></script>
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/tmdb.js"></script>
+
+    <!-- Script pemanggilan Function getListMovie() -->
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
             var page = window.location.hash.substr(1);
-            
+        
             document.querySelectorAll(".topnav a, .sidenav a")
             .forEach(function(element) {
+
+                element.addEventListener("click", function(event) {
+                    page = event.target.getAttribute("href").substr(1);
+                    switch (page) {
+                        case "playing":
+                            getListMovie("movie/now_playing", "Now Playing");
+                            break;
+                
+                        case "upcoming":
+                            getListMovie("movie/upcoming", "Up Coming");
+                            break;
+
+                        case "popular":
+                            getListMovie("movie/popular", "Popular");
+                        break;
+
+                        case "toprated":
+                            getListMovie("movie/top_rated", "Top Rated");
+                        break;
+
+                    }
+                });
         
-            element.addEventListener("click", function(event) {
-                page = event.target.getAttribute("href").substr(1);
-                switch (page) {
-                    case "playing":
-                        getListMovie("/movie/now_playing", "Now Playing");
-                        break;
-                        
-                    case "upcoming":
-                        getListMovie("/movie/upcoming", "Up Coming");
-                        break;
-                }
             });
-        });
-        getListMovie("/movie/now_playing", "Now_Playing");
-        document.getElementById("selection_title").innerHTML = sectiontitle;
+    
+            getListMovie("movie/now_playing", "Now Playing");
+            
+
         });
     </script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
     // REGISTER SERVICE WORKER
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", function() {
             navigator.serviceWorker
-            .register("js/sw.js")
-            .then(function() {
-
-                console.log("Pendaftaran ServiceWorker berhasil");
-            })
-            .catch(function() {
-                console.log("Pendaftaran ServiceWorker gagal");
+                .register("js/sw.js")
+                .then(function() {
+                    console.log("Pendaftaran ServiceWorker berhasil");
+                })
+                .catch(function() {
+                    console.log("Pendaftaran ServiceWorker gagal");
+                });
             });
-        });
-    } else {
-        console.log("ServiceWorker belum didukung browser ini.");
-    }
-</script>
-    </body>
-    </html>
+        } else {
+          console.log("ServiceWorker belum didukung browser ini.");
+        }
+    </script>
+
+ </body>
+</html>
+
+    
